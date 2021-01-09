@@ -8,7 +8,7 @@ public interface IAbility
     /// </summary>
     int Count { get; }
     /// <summary>
-    /// IAbilty has the collection of related slots for it's calcuation
+    /// IAbilty has the collection of related components for it's calcuation
     /// keys are a 0 array index 
     /// </summary>
     /// <param name="index"> any integer, values ouside of range will be wraped</param>

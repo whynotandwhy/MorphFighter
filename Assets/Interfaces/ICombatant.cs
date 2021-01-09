@@ -10,7 +10,7 @@ public interface ICombatant
     /// </summary>
     ICombatStats CombatStats { get; }
     /// <summary>
-    /// Specfic slots
+    /// Specfic Components
     /// 0 - head
     /// 1 - torso
     /// 2 - Left Arm
