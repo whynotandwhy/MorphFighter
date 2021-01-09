@@ -18,7 +18,7 @@ namespace Factory
         }
         public static FactoryConfig Instance => Instance;
 
-        [SerializeField] protected ICoreFactory coreFactory;
+        [SerializeField] protected BaseCoreFactory coreFactory;
         public static ICoreFactory CoreFactory => Instance.coreFactory;
     }
 }
