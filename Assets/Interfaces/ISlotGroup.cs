@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-public interface ISlotGroup 
+using UnityEngine.EventSystems;
+public interface ISlotGroup : IPointerDownHandler, IDropHandler
 {
-    List<ISlot> slots { get; set; }
-
-    bool newInventoryRequest(ISlot sourceSlot, ISlot destinationSlot);
+    List<ISlot> slots { get; }
+    bool NewInventoryRequest(ISlot sourceSlot, ISlot destinationSlot);
+    void UpdateInventory(ISlot newSlot);
 }
