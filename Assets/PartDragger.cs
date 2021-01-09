@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PartDragger : IPartDragger
 {
     public ISlot slot { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public IPart part { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     //Creates a resized part image and sets it to pointer position.
     public void OnBeginDrag(PointerEventData eventData)
