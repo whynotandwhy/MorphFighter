@@ -3,21 +3,21 @@
     /// <summary>
     /// Mental resource stat
     /// </summary>
-    float Concentration { get; set; }
+    float Concentration { get;}
     /// <summary>
     /// Mental resource restoration rate stat
     /// </summary>
-    float Consciousness { get; set; }
+    float Consciousness { get; }
     /// <summary>
     /// Physical resource stat
     /// </summary>
-    float Energy { get; set; }
+    float Energy { get;  }
     /// <summary>
     /// Physical resource restoration  rate stat
     /// </summary>
-    float Stamina { get; set; }
+    float Stamina { get; }
     /// <summary>
     /// Health resource stat
     /// </summary>
-    float HP { get; set; }
+    float HP { get; }
 }

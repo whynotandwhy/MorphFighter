@@ -1,12 +1,14 @@
 {
-    "name": "Tests",
+    "name": "EditModeTests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "NewAssembly",
-        "NewAssembly"
+        "Factory",
+        "Interfaces"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,

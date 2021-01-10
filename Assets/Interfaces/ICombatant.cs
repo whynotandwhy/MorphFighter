@@ -19,8 +19,16 @@ public interface ICombatant
     /// 5 - Right Leg
     /// </summary>
     IEnumerable<IPart> ComponentParts { get; }
+
+    /// <summary>
+    /// This gives us a way to reset the starting values for CombatStats 
+    /// </summary>
+    /// <param name="partList"></param>
+    void SetComponentParts(IEnumerable<KeyValuePair<int, IPart>> partList);
+
     /// <summary>
     /// The abilities available to this combatant
     /// </summary>
     IEnumerable<IAbility> Abilities { get; }
+
 }
