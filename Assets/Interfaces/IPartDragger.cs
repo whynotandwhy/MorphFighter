@@ -1,6 +1,6 @@
 ﻿using UnityEngine.EventSystems;
-public interface IPartDragger : IDragHandler, IBeginDragHandler, IEndDragHandler
+public interface IPartDragger
 {
-    ISlot slot { get; set; }
-    IPart part { get; set; }
+    ISlot SourceSlot { get; set; }
+    IPart SourcePart { get; set; }
 }

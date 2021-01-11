@@ -5,10 +5,30 @@ using UnityEngine.EventSystems;
 
 public class SlotGroup : MonoBehaviour, ISlotGroup
 {
-    public List<ISlot> slots => throw new System.NotImplementedException();
+    protected PartDragger partDragger;
+    protected List<Slot> slots = new List<Slot>();
+    public List<Slot> Slots => slots;
     protected ISlot sourceSlot;
     protected ISlot destinationSlot;
     protected IPart incomingPart;
+
+    public PartDragger Dragger { get => partDragger; }
+
+    /// <summary>
+    /// This is an early implementation of grabbing the child slots. In the future the slot group
+    /// should create and align each slot so they're in order.
+    /// </summary>
+    protected void Awake()
+    {
+        if(partDragger == null)
+            partDragger = FindObjectOfType<PartDragger>();
+
+        foreach (Slot slot in this.GetComponentsInChildren<Slot>())
+        {
+            slots.Add(slot);
+            slot.mySlotGroup = this;
+        }
+    }
 
     /// <summary>
     /// Here an Item Shop checks if the source slot is itself. If so, it then checks to see if the player
@@ -19,7 +39,7 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
     /// <param name="sourceSlot"></param>
     /// <param name="destinationSlot"></param>
     /// <returns></returns>
-    public bool NewInventoryRequest(IPart sourcePart, ISlot destinationSlot)
+    public virtual bool NewInventoryRequest(IPart sourcePart, ISlot destinationSlot)
     {
         throw new System.NotImplementedException();
     }
@@ -45,22 +65,36 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
     {
         throw new System.NotImplementedException();
     }
-
-    /// <summary>
-    /// Here we check to see if the pointer is over a slot and if so, we tell the PartDragger,
-    /// by passing the Slot and its Part to it. We then clear the slot.
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     /// <summary>
     /// This finalizes the part transfer by moving the incomingPart to the destinationSlot.
     /// </summary>
-    public void AddToInventory()
+    public void AddToInventory(IPart part, Slot slotDestination = null)
     {
-        throw new System.NotImplementedException();
+        if (slotDestination != null)
+        {
+            slotDestination.part = part;
+            Debug.Log(slotDestination.slotName + "'s part has " + slotDestination.part.Strength + " strength.");
+            return;
+        }
+
+        else
+            foreach (Slot slot in slots)
+                if (slot.part == null)
+                {
+                    Debug.Log("Found a slot for the drop.");
+                    slot.part = part;
+                    return;
+                }
+
+        Debug.Log("No slot found. You should do something about that.");                    
+    }
+
+    public void PickFromInventory(ISlot slotSource)
+    {
+        partDragger.SourcePart = slotSource.part;
+        partDragger.SourceSlot = slotSource;
+        slotSource.part = null;
     }
 }

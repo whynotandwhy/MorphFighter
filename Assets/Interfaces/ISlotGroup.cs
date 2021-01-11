@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
-public interface ISlotGroup : IPointerDownHandler, IDropHandler
+public interface ISlotGroup : IDropHandler
 {
-    List<ISlot> slots { get; }
+    List<Slot> Slots { get; }
     bool NewInventoryRequest(IPart sourceSlot, ISlot destinationSlot);
     void ReturnItem(IPart part, ISlot sourceSlot);
+    void AddToInventory(IPart part, Slot slotDestination = null);
+    void PickFromInventory(ISlot slotSource);
+
 }
