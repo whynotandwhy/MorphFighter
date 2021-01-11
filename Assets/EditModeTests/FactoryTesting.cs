@@ -23,6 +23,27 @@ namespace Tests
             Assert.AreEqual(3, testpart.Strength);
             Assert.AreEqual((1+2+3)/3, testpart.Rank);
         }
+        [Test]
+        public void CreationofICombatStats()
+        {
+            ICombatStats testComStat = FactoryConfig.CoreFactory.NewCombatStats(1, 2, 3, 4, 10);
+            Assert.AreEqual(1, testComStat.Concentration);
+            Assert.AreEqual(2, testComStat.Consciousness);
+            Assert.AreEqual(3, testComStat.Energy);
+            Assert.AreEqual(4, testComStat.Stamina);
+            Assert.AreEqual(10, testComStat.HP);
 
+            //TODO: finish testing creating an interface based on a ICombatStat and an IAblityEffect
+            ICombatStats MaxValues = FactoryConfig.CoreFactory.NewCombatStats(14, 12, 4, 123, 300);
+        }
+        [Test]
+        public void CreationOfIAbilityEffects()
+        {
+            IAbilityEffect testAbilityEffects = FactoryConfig.CoreFactory.NewAbilityEffect(1, -2, 40);
+            
+            Assert.AreEqual(1, testAbilityEffects.Concentration);
+            Assert.AreEqual(-2, testAbilityEffects.Energy);
+            Assert.AreEqual(40, testAbilityEffects.HP);
+        }
     }
 }

@@ -20,4 +20,9 @@
     /// Health resource stat
     /// </summary>
     float HP { get; }
+    /// <summary>
+    /// Increments physical stats by restoration stats
+    /// </summary>
+    void ApplyRestoration(ICombatStats MaxValues);
+    void ApplyAbilityEffect(IAbilityEffect ability);
 }

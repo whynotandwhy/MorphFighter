@@ -18,24 +18,24 @@ namespace Factory
             throw new System.NotImplementedException();
         }
 
-        public IAbilityEffect NewAbilityEffect(float Concentration, float Energy, float HP)
+        public IAbilityEffect NewAbilityEffect(float concentration, float energy, float hP)
+        {
+            return new AbilityEffect(concentration, energy, hP);
+        }
+
+        public ICombatant NewCombatant(IEnumerable<IAbilityEffect> components, IEnumerable<IAbility> abilites)
         {
             throw new System.NotImplementedException();
         }
 
-        public ICombatant NewCombatant(IEnumerable<IPart> components, IEnumerable<IAbility> abilites)
+        public ICombatStats NewCombatStats(float concentration, float consciousness, float energy, float stamina, float hP)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public ICombatStats NewCombatStats()
-        {
-            throw new System.NotImplementedException();
+            return new CombatStats(concentration, consciousness, energy, stamina, hP);
         }
 
         public ICombatStats NewCombatStats(ICombatStats source, IAbilityEffect abilityEffect)
         {
-            throw new System.NotImplementedException();
+            return new CombatStats(source, abilityEffect);
         }
 
         public IPart NewPart(float focus, float effort, float strength)

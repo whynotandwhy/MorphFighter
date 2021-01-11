@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// The effect an ability will have on a ICombatantStats resorse values
+/// The effect an ability will have on a ICombatantStats resourse values
 /// </summary>
 public interface IAbilityEffect 
 {

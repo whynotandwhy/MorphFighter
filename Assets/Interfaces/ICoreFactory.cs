@@ -7,8 +7,8 @@ public interface ICoreFactory
     IAbility FindAbility(int ablityID);
     IAbility FindAbility(string ablityName);
     IAbilityEffect NewAbilityEffect(float Concentration, float Energy, float HP);
-    ICombatant NewCombatant(IEnumerable<IPart> components, IEnumerable<IAbility> abilites);
-    ICombatStats NewCombatStats();
+    ICombatant NewCombatant(IEnumerable<IAbilityEffect> components, IEnumerable<IAbility> abilites);
+    ICombatStats NewCombatStats(float concentration, float consciousness, float energy, float stamina, float hP);
     ICombatStats NewCombatStats(ICombatStats source, IAbilityEffect abilityEffect);
     IPart NewPart(float focus, float effort, float strength);
 }

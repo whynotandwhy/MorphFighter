@@ -27,5 +27,28 @@ namespace Factory
             this.stamina = stamina;
             this.hP = hP;
         }
+        internal CombatStats(ICombatStats src, IAbilityEffect effect) : 
+            this(src.Concentration,src.Consciousness,src.Energy, src.Stamina,src.HP)
+        {
+            ApplyAbilityEffect(effect);
+        }
+
+        public void ApplyRestoration(ICombatStats MaxValues)
+        {
+            this.concentration += this.Consciousness;
+            this.concentration %= MaxValues.Concentration + 1;
+
+            this.energy += this.stamina;
+            this.energy %= MaxValues.Energy;
+        }
+
+        public void ApplyAbilityEffect(IAbilityEffect ability)
+        {
+            this.concentration += ability.Concentration;
+            this.energy += ability.Energy;
+            this.hP += ability.HP;
+        }
+
+
     }
 }
