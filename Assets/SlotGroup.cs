@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SlotGroup : MonoBehaviour, ISlotGroup
 {
+    [SerializeField] protected bool transfer;
     protected PartDragger partDragger;
     protected List<Slot> slots = new List<Slot>();
     public List<Slot> Slots => slots;
@@ -39,19 +40,18 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
     /// <param name="sourceSlot"></param>
     /// <param name="destinationSlot"></param>
     /// <returns></returns>
-    public virtual bool NewInventoryRequest(IPart sourcePart, ISlot destinationSlot)
+    public virtual bool NewInventoryRequest(IPart sourcePart)
     {
-        throw new System.NotImplementedException();
-    }
-
-    /// <summary>
-    /// Here a part is returned to its original slot.
-    /// </summary>
-    /// <param name="part"></param>
-    /// <param name="sourceSlot"></param>
-    public void ReturnItem(IPart part, ISlot sourceSlot)
-    {
-        throw new System.NotImplementedException();
+        if(transfer)
+        {
+            Debug.Log("Part was confirmed available for transfer.");
+            return transfer;
+        }
+        else
+        {
+            Debug.Log("Part was not available for transfer.");
+            return transfer;
+        }
     }
 
     /// <summary>
@@ -68,17 +68,48 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
     
 
     /// <summary>
-    /// This finalizes the part transfer by moving the incomingPart to the destinationSlot.
+    /// This adds an item to the inventory if it is returning to its original position and confirms with
+    /// the original inventory that the transfer is approved if not. This requires communicating with a
+    /// PartDragger to find the sourceSlot in its current iteration. 
     /// </summary>
     public void AddToInventory(IPart part, Slot slotDestination = null)
+    {
+        //This could have an additional parameter for sourceSlot if we wanted to allow this to function
+        //without a PartDragger if we wanted to utilize this code for gifted items from no inventory.
+
+        //This if statement is the way to return items to the same inventory it originated from.
+        if(partDragger.SourceSlot.mySlotGroup == this)
+        {
+            Debug.Log("A part is being returned.");
+            AddItemToSlot(part, slotDestination);
+            return;
+        }            
+        
+        if(partDragger.SourceSlot.mySlotGroup.NewInventoryRequest(part))
+        {
+            Debug.Log("A part is being added to the inventory.");
+            AddItemToSlot(part, slotDestination);
+            return;
+        }
+
+        Debug.Log("Part being returned to original slot.");
+        partDragger.SourceSlot.mySlotGroup.AddItemToSlot(part, (Slot)partDragger.SourceSlot);
+    }
+
+    public void PickFromInventory(ISlot slotSource)
+    {
+        partDragger.SourcePart = slotSource.part;
+        partDragger.SourceSlot = slotSource;
+        slotSource.part = null;
+    }
+
+    protected void AddItemToSlot(IPart part, Slot slotDestination)
     {
         if (slotDestination != null)
         {
             slotDestination.part = part;
-            Debug.Log(slotDestination.slotName + "'s part has " + slotDestination.part.Strength + " strength.");
             return;
         }
-
         else
             foreach (Slot slot in slots)
                 if (slot.part == null)
@@ -87,14 +118,7 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
                     slot.part = part;
                     return;
                 }
-
-        Debug.Log("No slot found. You should do something about that.");                    
-    }
-
-    public void PickFromInventory(ISlot slotSource)
-    {
-        partDragger.SourcePart = slotSource.part;
-        partDragger.SourceSlot = slotSource;
-        slotSource.part = null;
+        //Here we need some way to handle a full inventory.
+        Debug.Log("No slot found. You should do something about that.");
     }
 }

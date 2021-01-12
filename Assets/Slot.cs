@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, ISlot
 {
-    public string slotName;
-
     protected Part slotPart = null;
     public SlotGroup mySlotGroup { get; set; }
     public IPart part { get => slotPart; set => slotPart = value as Part; }
@@ -23,6 +21,20 @@ public class Slot : MonoBehaviour, ISlot
             Debug.Log("Part selected.");
             mySlotGroup.PickFromInventory(this);
         }
+        else
+        {
+            Debug.Log("No part in this slot.");
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        //this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        Debug.Log("Disappointing dad.");
     }
 
     /// <summary>
@@ -32,24 +44,11 @@ public class Slot : MonoBehaviour, ISlot
     /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
-        //mySlotGroup.NewInventoryRequest(part, this);
         mySlotGroup.AddToInventory(mySlotGroup.Dragger.SourcePart, this);
     }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        Debug.Log("Disappointing dad.");
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        Debug.Log("YASSSSS queen, drag her!"); 
-        this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
-    }
-
+    
     public void OnEndDrag(PointerEventData eventData)
     {
-        this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        Debug.Log("Scaring the straight guy.");
+        //this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }
