@@ -7,14 +7,15 @@ namespace Factory
 {
     internal class Part : IPart
     {
-        internal float focus;
         public float Focus => focus;
-        internal float effort;
+        internal float focus;
         public float Effort => effort;
-        internal float strength;
+        internal float effort;
         public float Strength => strength;
-        internal int rank;
+        internal float strength;
         public int Rank => rank;
+        internal int rank;
+
 
         internal Part(float focus, float effort, float strength, int rank)
         {

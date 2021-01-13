@@ -23,7 +23,7 @@ public interface ICombatant
     /// 4 - Left Leg
     /// 5 - Right Leg
     /// </summary>
-    IEnumerable<IAbilityEffect> ComponentParts { get; }
+    IReadOnlyDictionary<int, IAbilityEffect> ComponentParts { get; }
 
     /// <summary>
     /// This gives us a way to reset the starting values for CombatStats 
