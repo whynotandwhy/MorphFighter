@@ -23,13 +23,13 @@ public interface ICombatant
     /// 4 - Left Leg
     /// 5 - Right Leg
     /// </summary>
-    IReadOnlyDictionary<int, IAbilityEffect> ComponentParts { get; }
+    IReadOnlyDictionary<int, IPart> ComponentParts { get; }
 
     /// <summary>
     /// This gives us a way to reset the starting values for CombatStats 
     /// </summary>
     /// <param name="partList"></param>
-    void SetComponentParts(IEnumerable<KeyValuePair<int, IAbilityEffect>> partList);
+    void SetComponentParts(IEnumerable<KeyValuePair<int, IPart>> partList);
 
     /// <summary>
     /// The abilities available to this combatant
