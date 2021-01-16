@@ -17,7 +17,7 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
 
     /// <summary>
     /// This is an early implementation of grabbing the child slots. In the future the slot group
-    /// should create and align each slot so they're in order.
+    /// should create and position each slot so they're in order.
     /// </summary>
     protected void Awake()
     {
@@ -96,6 +96,11 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
         partDragger.SourceSlot.mySlotGroup.AddItemToSlot(part, (Slot)partDragger.SourceSlot);
     }
 
+    /// <summary>
+    /// This is called when we mouse down over a slot. It passes a slot reference and the item
+    /// to the PartDragger, then clears the slot.
+    /// </summary>
+    /// <param name="slotSource"></param>
     public void PickFromInventory(ISlot slotSource)
     {
         partDragger.SourcePart = slotSource.part;
@@ -103,11 +108,19 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
         slotSource.part = null;
     }
 
+    /// <summary>
+    /// This passes a part and slot to the SlotGroup, then checks where the part/slot came from
+    /// to follow the appropriate checks before either adding the item or sending it back to 
+    /// the original SlotGroup.
+    /// </summary>
+    /// <param name="part"></param>
+    /// <param name="slotDestination"></param>
     protected void AddItemToSlot(IPart part, Slot slotDestination)
     {
-        if (slotDestination != null)
+        if (slotDestination != null && slotDestination.part == null)
         {
             slotDestination.part = part;
+            partDragger.ClearPartDragger();
             return;
         }
         else
@@ -116,6 +129,7 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
                 {
                     Debug.Log("Found a slot for the drop.");
                     slot.part = part;
+                    partDragger.ClearPartDragger();
                     return;
                 }
         //Here we need some way to handle a full inventory.

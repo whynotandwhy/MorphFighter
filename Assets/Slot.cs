@@ -27,6 +27,11 @@ public class Slot : MonoBehaviour, ISlot
         }
     }
 
+    /// <summary>
+    /// This will need to likely implement some kind of CanvasGroup().blocksRaycasts = false; unless
+    /// the default image we populate in the PartDragger doesn't block raycasts by default.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
         //this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -38,7 +43,7 @@ public class Slot : MonoBehaviour, ISlot
     }
 
     /// <summary>
-    /// This should go to the Slot Group associated with this and either call NewInventoryRequest
+    /// This goes to the Slot Group associated with the slot under the pointer and either call NewInventoryRequest
     /// or return the item depending on the circumstances.
     /// </summary>
     /// <param name="eventData"></param>
@@ -46,9 +51,19 @@ public class Slot : MonoBehaviour, ISlot
     {
         mySlotGroup.AddToInventory(mySlotGroup.Dragger.SourcePart, this);
     }
-    
+
+    /// <summary>
+    /// This checks to see if we still the Dragger still has a part (meaning we didn't drop it in an appropriate slot 
+    /// or slot group), and if so, returns the part to this slot.
+    /// This will need to likely implement some kind of CanvasGroup().blocksRaycasts = true; unless
+    /// the default image we populate in the PartDragger doesn't block raycasts by default. 
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
         //this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        if (mySlotGroup.Dragger.SourcePart != null || mySlotGroup.Dragger.SourceSlot != null)
+            mySlotGroup.AddToInventory(mySlotGroup.Dragger.SourcePart, this);
     }
 }

@@ -13,10 +13,9 @@ public class PartDragger : MonoBehaviour, IPartDragger
     public ISlot SourceSlot { get => sourceSlot; set => sourceSlot = value as Slot; }
     public IPart SourcePart { get => sourcePart; set => sourcePart = value as Part; }
 
-    //Creates a resized part image and sets it to pointer position.
-
-    //Updates the part image to the pointer position.
-
-    //Clears part, image, and slot.
-
+    public void ClearPartDragger()
+    {
+        sourcePart = null;
+        sourceSlot = null;
+    }
 }
