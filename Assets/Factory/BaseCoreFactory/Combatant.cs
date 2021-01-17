@@ -17,17 +17,20 @@ namespace Factory
         public IEnumerable<IAbility> Abilities => abilities;
         protected List<IAbility> abilities;
 
-        internal Combatant(IEnumerable<IAbility>abilities, IReadOnlyDictionary<int, IPart> partList = default)
+        internal Combatant(IEnumerable<IAbility>abilities, IEnumerable<KeyValuePair<int, IPart>> partList = default)
         {
             abilities = (abilities == default) ? new List<IAbility>() : new List<IAbility>(abilities);
             componentParts = new Dictionary<int, IPart>();
+            if (partList != default)
+                SetComponentParts(partList);
         }
 
         public void SetComponentParts(IEnumerable<KeyValuePair<int, IPart>> partList)
         {
             componentParts.Clear();
             if (partList != default)
-                partList.Select(x => { componentParts.Add(x.Key, x.Value); return x; }) ;
+                foreach (KeyValuePair<int, IPart> part in partList)
+                    componentParts.Add(part.Key, part.Value);
 
             startingCombats = CalculateStartingCombatStats();
             maxCombatStats = CalculateMaxCombatStats();
@@ -42,19 +45,19 @@ namespace Factory
         internal Dictionary<int, ICombatStats> startingValuesStatsFocus = new Dictionary<int, ICombatStats>()
         {
             {1, FactoryConfig.CoreFactory.NewCombatStats(0,0,2,0,0) },
-            {2, FactoryConfig.CoreFactory.NewCombatStats(0.1f,0,0,0,0) },
-            {3, FactoryConfig.CoreFactory.NewCombatStats(0.1f,0,0,0,0) },
-            {4, FactoryConfig.CoreFactory.NewCombatStats(0.1f,0,0,0,0) },
-            {5, FactoryConfig.CoreFactory.NewCombatStats(0.1f,0,0,0,0) }
+            {2, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) },
+            {3, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) },
+            {4, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) },
+            {5, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) }
         };
         internal Dictionary<int, ICombatStats> startingValuesStatsEffort = new Dictionary<int, ICombatStats>()
         {
             {0, FactoryConfig.CoreFactory.NewCombatStats(0,1,0,0,0) },
             {1, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,1,0) },
-            {2, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) },
-            {3, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) },
-            {4, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) },
-            {5, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) }
+            {2, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0,0) },
+            {3, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0,0) },
+            {4, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0,0) },
+            {5, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0,0) }
         };
         internal Dictionary<int, ICombatStats> startingValuesStatsStrength = new Dictionary<int, ICombatStats>()
         {
@@ -68,9 +71,15 @@ namespace Factory
         internal Dictionary<int, ICombatStats> MaxValuesFocus = new Dictionary<int, ICombatStats>()
         {
             {0, FactoryConfig.CoreFactory.NewCombatStats(5,0,0,0,0) },
+            {2, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) },
+            {3, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) },
+            {4, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) },
+            {5, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,0.1f,0) }
         };
         internal Dictionary<int, ICombatStats> MaxValuesEffort = new Dictionary<int, ICombatStats>()
         {
+            {0, FactoryConfig.CoreFactory.NewCombatStats(0,1,0,0,0) },
+            {1, FactoryConfig.CoreFactory.NewCombatStats(0,0,0,1,0) },
             {2, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) },
             {3, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) },
             {4, FactoryConfig.CoreFactory.NewCombatStats(0,0,1,0,0) },

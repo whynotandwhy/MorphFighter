@@ -23,9 +23,9 @@ namespace Factory
             return new AbilityEffect(concentration, energy, hP);
         }
 
-        public ICombatant NewCombatant(IEnumerable<IAbilityEffect> components, IEnumerable<IAbility> abilites)
+        public ICombatant NewCombatant(IEnumerable<KeyValuePair<int, IPart>> components, IEnumerable<IAbility> abilites)
         {
-            throw new System.NotImplementedException();
+            return new Combatant(abilites, components);
         }
 
         public ICombatStats NewCombatStats(float concentration, float consciousness, float energy, float stamina, float hP)
