@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour, ISlot
 {
     protected Part slotPart = null;
-    public SlotGroup mySlotGroup { get; set; }
+    protected SlotGroup slotGroup = null;
+    public ISlotGroup mySlotGroup { get => slotGroup; set => slotGroup = value as SlotGroup; }
     public IPart part { get => slotPart; set => slotPart = value as Part; }
 
     /// <summary>
@@ -49,7 +50,7 @@ public class Slot : MonoBehaviour, ISlot
     /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
-        mySlotGroup.AddToInventory(mySlotGroup.Dragger.SourcePart, this);
+        slotGroup.AddToInventory(slotGroup.Dragger.SourcePart, this);
     }
 
     /// <summary>
@@ -63,7 +64,7 @@ public class Slot : MonoBehaviour, ISlot
     {
         //this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (mySlotGroup.Dragger.SourcePart != null || mySlotGroup.Dragger.SourceSlot != null)
-            mySlotGroup.AddToInventory(mySlotGroup.Dragger.SourcePart, this);
+        if (slotGroup.Dragger.SourcePart != null || slotGroup.Dragger.SourceSlot != null)
+            mySlotGroup.AddToInventory(slotGroup.Dragger.SourcePart, this);
     }
 }

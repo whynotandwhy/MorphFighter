@@ -19,7 +19,7 @@ namespace Factory
         internal Combatant(IEnumerable<IAbility>abilities, IReadOnlyDictionary<int, IAbilityEffect> partList = default)
         {
             abilities = (abilities == default) ? new List<IAbility>() : new List<IAbility>(abilities);
-            componentParts = (partList == default) ? new Dictionary<int, IAbilityEffect>() : new Dictionary<int, IAbilityEffect>(partList);
+            //componentParts = (partList == default) ? new Dictionary<int, IAbilityEffect>() : new Dictionary<int, IAbilityEffect>(partList);
         }
 
         public void SetComponentParts(IEnumerable<KeyValuePair<int, IAbilityEffect>> partList)
