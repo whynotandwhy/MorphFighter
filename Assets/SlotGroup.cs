@@ -63,7 +63,11 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
     /// returns true, we call AddToInventory here.
     /// </summary>
     /// <param name="eventData"></param>
-    public void OnDrop(PointerEventData eventData) => AddToInventory(Dragger.SourcePart);
+    public void OnDrop(PointerEventData eventData)
+    {
+        if(Dragger.SourcePart != null)
+            AddToInventory(Dragger.SourcePart);
+    }
 
     /// <summary>
     /// This is an early implementation of grabbing the child slots. In the future the slot group
