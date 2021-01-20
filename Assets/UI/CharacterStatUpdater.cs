@@ -33,8 +33,7 @@ public class CharacterStatUpdater : CoreUIElement<ICombatStats>
         SetPercentage(energyBar, primaryData.Energy);
         UpdateNumericText(hpNumber, "{0}", primaryData.Energy);
         SetPercentage(staminaBar, primaryData.Stamina);
-        UpdateNumericText(hpNumber, "{0}", primaryData.Stamina);
-    }
+        UpdateNumericText(hpNumber, "{0}", primaryData.Stamina);    }
 
     protected override bool ClearedIfEmpty(ICombatStats newData)
     {

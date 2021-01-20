@@ -119,7 +119,6 @@ public class SlotGroup : MonoBehaviour, ISlotGroup
             foreach (Slot slot in slots)
                 if (slot.part == null)
                 {
-                    Debug.Log("Found a slot for the drop.");
                     slot.part = part;
                     partDragger.ClearPartDragger();
                     return;

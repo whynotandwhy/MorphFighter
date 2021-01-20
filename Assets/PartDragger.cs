@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class PartDragger : MonoBehaviour, IPartDragger
 {
-    [SerializeField] protected Image dragImage;
 
+    protected PartUIDragger partUIDragger;
     protected Slot sourceSlot;
     protected Part sourcePart;
     public ISlot SourceSlot { get => sourceSlot; set => sourceSlot = value as Slot; }
@@ -17,5 +17,22 @@ public class PartDragger : MonoBehaviour, IPartDragger
     {
         sourcePart = null;
         sourceSlot = null;
+        partUIDragger.EndPartDrag();
+    }
+
+    protected void Awake()
+    {
+        partUIDragger = FindObjectOfType<PartUIDragger>();
+    }
+
+    private void Update()
+    {
+        BeginUIDrag();
+    }
+
+    protected void BeginUIDrag()
+    {
+        if (SourcePart != null)
+            partUIDragger.DisplayPartDrag(SourcePart);
     }
 }

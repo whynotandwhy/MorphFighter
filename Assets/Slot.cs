@@ -7,6 +7,7 @@ public class Slot : MonoBehaviour, ISlot
 {
     protected Part slotPart = null;
     protected SlotGroup slotGroup = null;
+    protected PartDragger partDragger = null;
     public ISlotGroup mySlotGroup { get => slotGroup; set => slotGroup = value as SlotGroup; }
     public IPart part { get => slotPart; set => slotPart = value as Part; }
 
@@ -19,7 +20,6 @@ public class Slot : MonoBehaviour, ISlot
     {
         if(part != null)
         {
-            Debug.Log("Part selected.");
             mySlotGroup.PickFromInventory(this);
         }
         else
@@ -66,5 +66,10 @@ public class Slot : MonoBehaviour, ISlot
 
         if (slotGroup.Dragger.SourcePart != null || slotGroup.Dragger.SourceSlot != null)
             mySlotGroup.AddToInventory(slotGroup.Dragger.SourcePart, this);
+    }
+
+    protected void Start()
+    {
+        partDragger = slotGroup.Dragger;
     }
 }
