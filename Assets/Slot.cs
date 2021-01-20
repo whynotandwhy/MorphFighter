@@ -50,7 +50,7 @@ public class Slot : MonoBehaviour, ISlot
     /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
-        slotGroup.AddToInventory(slotGroup.Dragger.SourcePart, this);
+        slotGroup.AddToInventory(partDragger.SourcePart, this);
     }
 
     /// <summary>
@@ -64,8 +64,8 @@ public class Slot : MonoBehaviour, ISlot
     {
         //this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (slotGroup.Dragger.SourcePart != null || slotGroup.Dragger.SourceSlot != null)
-            mySlotGroup.AddToInventory(slotGroup.Dragger.SourcePart, this);
+        if (partDragger.SourcePart != null || partDragger.SourceSlot != null)
+            mySlotGroup.AddToInventory(partDragger.SourcePart, this);
     }
 
     protected void Start()
