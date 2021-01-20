@@ -38,10 +38,6 @@ namespace Factory
         }
 
 
-        float Focus { get; }
-        float Effort { get; }
-        float Strength { get; }
-
         internal Dictionary<int, ICombatStats> startingValuesStatsFocus = new Dictionary<int, ICombatStats>()
         {
             {1, FactoryConfig.CoreFactory.NewCombatStats(0,0,2,0,0) },
