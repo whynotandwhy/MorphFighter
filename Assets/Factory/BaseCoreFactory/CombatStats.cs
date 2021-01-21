@@ -5,19 +5,20 @@ using UnityEngine;
 
 namespace Factory
 {
+    [System.Serializable]
     internal class CombatStats : ICombatStats
     {
         public float Concentration => concentration;
-        internal float concentration;
+        [SerializeField]internal float concentration;
         public float Consciousness => consciousness;
-        internal float consciousness;
+        [SerializeField] internal float consciousness;
         public float Energy => energy;
-        internal float energy;
+        [SerializeField] internal float energy;
         public float Stamina => stamina;
-        internal float stamina;
+        [SerializeField] internal float stamina;
 
         public float HP => hP;
-        internal float hP;
+        [SerializeField] internal float hP;
 
         internal CombatStats(float concentration, float consciousness, float energy, float stamina, float hP)
         {

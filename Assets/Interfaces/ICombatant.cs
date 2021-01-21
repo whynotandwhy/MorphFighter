@@ -1,5 +1,18 @@
 ﻿using System.Collections.Generic;
 
+
+public enum ComponentIds
+{
+    Head = 0,
+    Torso,
+    LeftArm,
+    RightArm,
+    LeftLeg,
+    RightLeg,
+ }
+
+
+
 /// <summary>
 /// ICombatant is a summation of the player information  
 /// </summary>
